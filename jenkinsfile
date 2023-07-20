@@ -1,0 +1,39 @@
+pipeline{
+       agent any
+    tools {
+  maven 'm1'
+}
+stages {
+  stage('install') {
+    steps {git branch: 'master', url:https://github.com/MedhaJoshi2019/ExcelStudy/new/master'
+        
+      sh 'mvn install'
+    }
+
+    tools {
+      maven 'm1'
+    }
+  }
+
+  stage('test') {
+    steps {
+      sh 'mvn test'
+    }
+    tools {
+      maven 'm1'
+    }
+  }
+
+  stage('clean install') {
+    steps { git branch: 'master', url:https://github.com/MedhaJoshi2019/ExcelStudy/new/master'
+     sh 'mvn clean install'
+    }
+
+    tools {
+      maven 'm1'
+    }
+  }
+
+}
+
+}
